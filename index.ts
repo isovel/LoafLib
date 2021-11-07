@@ -1,4 +1,4 @@
-/* —————————— Copyright (c) 2021 toastythetoaster, No rights reserved ——————————
+/* ———————————————————— Copyright (c) 2021 toastythetoaster ————————————————————
  *
  * LoafLib
  *
