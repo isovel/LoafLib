@@ -1,7 +1,7 @@
 {
   "name": "LoafLib",
-  "description": "A lightweight library for Astra. \nNOTE: Works regardless of being enabled/disabled.",
-  "version": "0",
+  "description": "A small lib for some of my plugins. \nNOTE: Works regardless of being enabled/disabled.",
+  "version": "1.0",
   "author": {
     "name": "Toasty",
     "id": "255515821541949440"
