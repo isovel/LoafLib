@@ -21,76 +21,73 @@ export default class LoafLib extends UPlugin {
     });
   }
 
-  public static createContextMenuGroup(children: any, options: any = {}): any | null {
-    if (!contextMenuItems) return null;
-    else return React.createElement(
-      MenuGroup,
-      {
-        children,
-        ...options
-      }
-    );
-  }
-  
-  public static createContextMenuSeparator(options: any = {}): any | null {
-    if (!contextMenuItems) return null;
-    else return React.createElement(
-      MenuSeparator,
-      {
-        ...options
-      }
-    );
-  }
-
-  public static createContextMenuItem(label: string, action: () => void, id: string, options: any = {}): any | null {
-    if (!contextMenuItems) return null;
-    else return React.createElement(
-      MenuItem,
-      {
-        label,
-        id,
-        action: () => (!options.noClose && ContextMenuActions.closeContextMenu(), action()),
-        ...options
-      }
-    );
-  }
-
-  public static createContextMenuSubMenu(label: string, children, id: string, options: any = {}): any | null {
-    if (!contextMenuItems) return null;
-    else return React.createElement(
-      MenuItem,
-      {
-        label,
-        children,
-        id,
-        ...options
-      }
-    );
-  }
-
-  public static createContextMenuControlItem(control: (...any) => any, id: string, options: any = {}): any | null {
-    if (!contextMenuItems) return null;
-    else return React.createElement(
-      MenuControlItem,
-      {
-        id,
-        control: () => control(),
-        ...options
-      }
-    );
-  }
-
-  public static createContextMenuCheckboxItem(label: string, action: () => void, id: string, checked: boolean, options: any = {}): any | null {
-    if (!contextMenuItems) return null;
-    else return React.createElement(
-      MenuCheckboxItem,
-      {
-        label,
-        id,
-        action: () => (!options.noClose && ContextMenuActions.closeContextMenu(), action()),
-        checked,
-        ...options
-      }
-    );
+  public static ContextMenus = {
+    createContextMenuGroup(children: any, options: any = {}): any | null {
+      if (!contextMenuItems) return null;
+      else return React.createElement(
+        MenuGroup,
+        {
+          children,
+          ...options
+        }
+      );
+    },
+    createContextMenuSeparator(options: any = {}): any | null {
+      if (!contextMenuItems) return null;
+      else return React.createElement(
+        MenuSeparator,
+        {
+          ...options
+        }
+      );
+    },
+    createContextMenuItem(label: string, action: () => void, id: string, options: any = {}): any | null {
+      if (!contextMenuItems) return null;
+      else return React.createElement(
+        MenuItem,
+        {
+          label,
+          id,
+          action: () => (!options.noClose && ContextMenuActions.closeContextMenu(), action()),
+          ...options
+        }
+      );
+    },
+    createContextMenuSubMenu(label: string, children, id: string, options: any = {}): any | null {
+      if (!contextMenuItems) return null;
+      else return React.createElement(
+        MenuItem,
+        {
+          label,
+          children,
+          id,
+          ...options
+        }
+      );
+    },
+    createContextMenuControlItem(control: (...any) => any, id: string, options: any = {}): any | null {
+      if (!contextMenuItems) return null;
+      else return React.createElement(
+        MenuControlItem,
+        {
+          id,
+          control: () => control(),
+          ...options
+        }
+      );
+    },
+    createContextMenuCheckboxItem(label: string, action: () => void, id: string, checked: boolean, options: any = {}): any | null {
+      if (!contextMenuItems) return null;
+      else return React.createElement(
+        MenuCheckboxItem,
+        {
+          label,
+          id,
+          action: () => (!options.noClose && ContextMenuActions.closeContextMenu(), action()),
+          checked,
+          ...options
+        }
+      );
+    }
   }
 }
