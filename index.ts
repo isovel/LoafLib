@@ -104,14 +104,27 @@ export default class LoafLib extends UPlugin {
         return toast.id;
       }
     },
+    info(content: string): string | null {
+      return this.show(content, ToastType.MESSAGE);
+    },
+    success(content: string): string | null {
+      return this.show(content, ToastType.SUCCESS);
+    },
+    error(content: string): string | null {
+      return this.show(content, ToastType.FAILURE);
+    },
     pop(id?: string): void {
       if (!Toast || !ToastStore) return;
-      else useToastStore.setState((e => {
-        const toastQueue = e.queuedToasts;
-        console.log(toastQueue);
-        return toastQueue.length ? {
-          currentToast: toastQueue[0],
-          queuedToasts: toastQueue.slice(1)
+      else useToastStore.setState(((e: any): any => {
+        const t: Array<any> = e.queuedToasts;
+        const a = t.filter((_, i) => i !== t.findIndex(t => t.id === id));
+        t === a && Astra.warn(`Toast with id '${id}' not found!`);
+        return t.length ? id ? {
+          currentToast: a[0],
+          queuedToasts: a
+        } : {
+          currentToast: t[0],
+          queuedToasts: t.slice(1)
         } : {
           currentToast: null,
           queuedToasts: []
