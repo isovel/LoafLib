@@ -1,26 +1,26 @@
 
-/* ———————————————————— Copyright (c) 2021 toastythetoaster ————————————————————
+/* ——————— Copyright (c) 2021-2022 toastythetoaster. All rights reserved. ———————
  *
  * LoafLib
  *
- * ————————————————————————————————————————————————————————————————————————————— */
+ * —————————————————————————————————————————————————————————————————————————————— */
 /* eslint-disable no-negated-condition, no-else-return, no-useless-return, react/no-children-prop */
 
 import { UPlugin } from '@classes';
-import { React, ContextMenuActions, getModule, getByDisplayName, getByProps } from '@webpack';
+import { React, ContextMenuActions, getModule } from '@webpack';
 
 const contextMenuItems = getModule(m => m.MenuRadioItem && !m.default);
 const Toast = getModule(m => m.createToast && m.default?.displayName === 'Toast');
 const ToastStore = getModule(m => m.showToast && !m.default);
 const { MenuGroup, MenuSeparator, MenuItem, MenuControlItem, MenuCheckboxItem } = contextMenuItems;
 const { createToast, ToastType } = Toast;
-const { showToast, popToast, useToastStore } = ToastStore;
+const { showToast, useToastStore } = ToastStore;
 
 export default class LoafLib extends UPlugin {
   constructor() {
     super();
-    if (window.LoafLib) Object.assign(window.LoafLib, this.constructor);
-    else Object.defineProperty(window, 'LoafLib', {
+    if (global.LoafLib) Object.assign(global.LoafLib, this.constructor);
+    else Object.defineProperty(global, 'LoafLib', {
       value: this.constructor
     });
   }
@@ -116,7 +116,7 @@ export default class LoafLib extends UPlugin {
     pop(id?: string): void {
       if (!Toast || !ToastStore) return;
       else useToastStore.setState(((e: any): any => {
-        const t: Array<any> = e.queuedToasts;
+        const t: any[] = e.queuedToasts;
         const a = t.filter((_, i) => i !== t.findIndex(t => t.id === id));
         t === a && Astra.warn(`Toast with id '${id}' not found!`);
         return t.length ? id ? {
