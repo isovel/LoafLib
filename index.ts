@@ -16,6 +16,8 @@ const { MenuGroup, MenuSeparator, MenuItem, MenuControlItem, MenuCheckboxItem } 
 const { createToast, ToastType } = Toast;
 const { showToast, useToastStore } = ToastStore;
 
+const objectIncludesKeyword = (o, k) => Object.keys(o).some(e => e.includes(k.toLowerCase()) || e.includes(k.charAt(0).toUpperCase().concat(k.slice(1))));
+
 export default class LoafLib extends UPlugin {
   constructor() {
     super();
@@ -130,6 +132,12 @@ export default class LoafLib extends UPlugin {
           queuedToasts: []
         };
       }));
+    }
+  }
+
+  public static Webpack = {
+    getByKeyword(keyword: string, shouldCheckDefaults = false): any {
+      return getModule(m => objectIncludesKeyword(m, keyword) || ((shouldCheckDefaults || false) && m.default && objectIncludesKeyword(m.default, keyword)));
     }
   }
 }
