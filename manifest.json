@@ -1,9 +1,17 @@
 {
   "name": "LoafLib",
+  "id": "LoafLib",
   "description": "A small lib for some of my plugins. \nNOTE: Works regardless of being enabled/disabled.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Toasty",
     "id": "255515821541949440"
-  }
+  },
+  "support": "NDzjMB2WhR",
+  "donations": [
+    {
+      "name": "Ko-fi",
+      "link": "https://ko-fi.com/slice"
+    }
+  ]
 }
