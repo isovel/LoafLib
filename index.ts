@@ -16,7 +16,7 @@ const { MenuGroup, MenuSeparator, MenuItem, MenuControlItem, MenuCheckboxItem } 
 const { createToast, ToastType } = Toast;
 const { showToast, useToastStore } = ToastStore;
 
-const objectIncludesKeyword = (o, k) => Object.keys(o).some(e => e.includes(k.toLowerCase()) || e.includes(k.charAt(0).toUpperCase().concat(k.slice(1))));
+const propsIncludeKeyword = (o, k) => Object.keys(o).some(e => e.includes(k.toLowerCase()) || e.includes(k.charAt(0).toUpperCase().concat(k.slice(1).toLowerCase())));
 
 export default class LoafLib extends UPlugin {
   constructor() {
@@ -137,7 +137,10 @@ export default class LoafLib extends UPlugin {
 
   public static Webpack = {
     getByKeyword(keyword: string, shouldCheckDefaults = false): any {
-      return getModule(m => objectIncludesKeyword(m, keyword) || ((shouldCheckDefaults || false) && m.default && objectIncludesKeyword(m.default, keyword)));
+      return getModule(m => propsIncludeKeyword(m, keyword) || (shouldCheckDefaults && m.default && propsIncludeKeyword(m.default, keyword)));
+    },
+    getAllByKeyword(keyword: string, shouldCheckDefaults = false): any {
+      return getModule(m => propsIncludeKeyword(m, keyword) || (shouldCheckDefaults && m.default && propsIncludeKeyword(m.default, keyword)), { all: true });
     }
   }
 }
